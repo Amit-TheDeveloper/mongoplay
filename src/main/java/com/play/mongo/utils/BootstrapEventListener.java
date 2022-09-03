@@ -1,9 +1,8 @@
 package com.play.mongo.utils;
 
 import com.play.mongo.nonreactive.EmployeeRepository;
-import com.play.mongo.reactive.ReactiveEmployeeRepository;
+import com.play.mongo.reactive.service.ReactiveEmployeeService;
 import com.play.mongo.utils.domain.Employee;
-import com.play.mongo.nonreactive.EmployeeRepository;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -11,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class BootstrapEventListener {
 
-    ReactiveEmployeeRepository reactiveEmployeeRepository;
+    ReactiveEmployeeService reactiveEmployeeService;
     EmployeeRepository nonReactiveEmployeeRepository;
-    BootstrapEventListener(ReactiveEmployeeRepository reactiveEmployeeRepository, EmployeeRepository nonReactiveEmployeeRepository) {
+    BootstrapEventListener(ReactiveEmployeeService reactiveEmployeeService, EmployeeRepository nonReactiveEmployeeRepository) {
         this.nonReactiveEmployeeRepository = nonReactiveEmployeeRepository;
-        this.reactiveEmployeeRepository = reactiveEmployeeRepository;
+        this.reactiveEmployeeService = reactiveEmployeeService;
     }
 
     @EventListener
@@ -50,24 +49,27 @@ public class BootstrapEventListener {
 
     private void saveEmployeeReactive() {
         Employee employeeA = new Employee();
-        employeeA.setId("1000");
-        employeeA.setFirstName("reactive catalog - S");
-        employeeA.setLastName("reactive catalogX");
+        employeeA.setId("2000");
+        employeeA.setFirstName("First Name-A");
+        employeeA.setLastName("Last Name-A");
 
         Employee employeeB = new Employee();
-        employeeB.setId("1001");
-        employeeB.setFirstName("reactive catalog - M");
-        employeeB.setLastName("reactive catalogY");
+        employeeB.setId("2001");
+        employeeB.setFirstName("First Name-B");
+        employeeB.setLastName("Last Name-B");
 
         Employee employeeC = new Employee();
-        employeeC.setId("1002");
-        employeeC.setFirstName("reactive catalog - G");
-        employeeC.setLastName("reactive catalogZ");
+        employeeC.setId("2002");
+        employeeC.setFirstName("First Name-C");
+        employeeC.setLastName("Last Name-C");
 
 
-        reactiveEmployeeRepository.save(employeeA).block();
-        reactiveEmployeeRepository.save(employeeB).block();
-        reactiveEmployeeRepository.save(employeeC).block();
+        reactiveEmployeeService.save(employeeA);
+        reactiveEmployeeService.save(employeeB);
+        reactiveEmployeeService.save(employeeC);
+
+       Employee emp = reactiveEmployeeService.findByLastName("Last Name-C").block();
+       System.out.println(emp.toString());
 
     }
 
