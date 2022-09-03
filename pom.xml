@@ -24,6 +24,7 @@
 		</dependency>
 		<!--	For Non Reactive Mongo jars required-->
 
+		<!--	For Reactive Mongo jars required-->
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
@@ -33,6 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
+		<!--	For Reactive Mongo jars required-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
