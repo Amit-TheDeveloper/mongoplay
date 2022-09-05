@@ -39,7 +39,6 @@ public class BootstrapEventListener {
         employeeC.setFirstName("catalog GG");
         employeeC.setLastName("catalogZZ");
 
-
         nonReactiveEmployeeRepository.save(employeeA);
         nonReactiveEmployeeRepository.save(employeeB);
         nonReactiveEmployeeRepository.save(employeeC);
